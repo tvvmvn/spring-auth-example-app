@@ -33,7 +33,9 @@
         </div>
 
         <div class="card-body">
-          <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+          
+          <!-- form -->
+          <form method="post" role="form" th:action="@{/register}" th:object="${user}">
             <div class="form-group mb-3">
               <label class="form-label">First Name</label>
               <input class="form-control" id="firstName" name="firstName" placeholder="Enter first name"
@@ -66,6 +68,7 @@
               <span>Already registered? <a th:href="@{/login}">Login here</a></span>
             </div>
           </form>
+
         </div>
       </div>
     </div>

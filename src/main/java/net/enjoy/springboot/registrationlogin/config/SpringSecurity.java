@@ -27,35 +27,37 @@ public class SpringSecurity {
 
     http
         .csrf().disable()
+        // Access control to Urls
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/h2-ui/**", "/register/**").permitAll()
             .anyRequest().authenticated()
         )
+        // Login (Form login)
         .formLogin(form -> form
             .loginPage("/login")
             .loginProcessingUrl("/login")
             .defaultSuccessUrl("/", true)
             .permitAll())
+        // Logout
         .logout(logout -> logout
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .permitAll());
             
     return http.build();
   }
+  
+  // Configure authentication manager.
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    
+    // AuthenticationManager (responsible for login process)
+    auth
+        .userDetailsService(userDetailsService) // to get an user from login email 
+        .passwordEncoder(passwordEncoder()); // to encode login password to compare with original
+  }
 
   @Bean
   public static PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-  }
-
-  // configure authentication manager.
-  // (AuthenticationManager is responsible for login process).
-  @Autowired
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    
-    // auth builds AuthenticationManager
-    auth
-        .userDetailsService(userDetailsService) // to get an user from login email 
-        .passwordEncoder(passwordEncoder()); // to encode login password to compare with original
   }
 }

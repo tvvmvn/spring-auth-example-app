@@ -2,6 +2,11 @@
 > login and registration process
 
 
+### What we'll learn
+- Authentication Process
+- Layered Pattern with Service, DTO
+
+
 ### Dependencies
 - Spring Security
 - Spring Web
@@ -11,5 +16,6 @@
 - Lombok
 - Thymeleaf
 - Devtools
+
 
 <!-- ### Authentication Process Diagram -->

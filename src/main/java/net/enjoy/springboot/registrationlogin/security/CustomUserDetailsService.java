@@ -20,11 +20,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     
     User user = userRepository.findByEmail(email);
 
+    // return user with email from client
     if (user != null) {
-      // return UserDetails
-      return userRepository.findByEmail(email);
+      // UserDetails
+      return user;
 
-    } else {
+    } else { // email not found, throw exception (auth failed)
       throw new UsernameNotFoundException("Invalid username or password.");
     }
   }

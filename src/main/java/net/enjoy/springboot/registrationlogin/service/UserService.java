@@ -20,6 +20,7 @@ public class UserService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+  // Save an user
   public void saveUser(UserDto userDto) {
 
     User user = new User();
@@ -32,10 +33,12 @@ public class UserService {
     userRepository.save(user);
   }
 
+  // find an user by email
   public User findUserByEmail(String email) {
     return userRepository.findByEmail(email);
   }
 
+  // find all users
   public List<UserDto> findAllUsers() {
 
     List<User> users = userRepository.findAll();
@@ -44,6 +47,7 @@ public class UserService {
         .collect(Collectors.toList());
   }
 
+  // Conver Entity to DTO
   private UserDto convertEntityToDto(User user) {
     
     UserDto userDto = new UserDto();
